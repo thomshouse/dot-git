@@ -2,8 +2,8 @@
 
 pkg.install() {
     # Setup git user & email if it's not already set
-    GIT_FULLNAME="$(git config --global user.name >/dev/null)"
-    GIT_EMAIL="$(git config --global user.email >/dev/null)"
+    GIT_FULLNAME="$(git config --global user.name 2>/dev/null)"
+    GIT_EMAIL="$(git config --global user.email 2>/dev/null)"
     if [ -z "$GIT_FULLNAME" ]; then
         echo ""
         while [ -z "$GIT_FULLNAME" ]; do
@@ -20,7 +20,7 @@ pkg.install() {
     fi
 
     # Check to see if .gitconfig.dotfiles is included in the main .gitconfig
-    if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" && ! $(grep -Fxq ".gitconfig.dotfiles" "$HOME/.gitconfig") ]]; then
+    if [[ -f "$HOME/.gitconfig" && ! -L "$HOME/.gitconfig" && -z "$(grep -F ".gitconfig.dotfiles" "$HOME/.gitconfig")" ]]; then
         # Ask to add the include automatically
         echo ""
         read -e -p "Do you want to automatically include .gitconfig.dotfiles in your main .gitconfig file? [Y/n] " ADD_TO_GITCONFIG
@@ -31,7 +31,7 @@ pkg.install() {
         else
             # Provide manual instructions
             echo -e "\nYou will need to manually include the .gitconfig.dotfiles file in your .gitconfig. Example:\n"
-            echo -e "\n# Include dotfiles config\n[include]"
+            echo -e "# Include dotfiles config\n[include]"
             echo -e "  path = ~/.gitconfig.dotfiles\n"
         fi
     fi
