@@ -27,12 +27,12 @@ pkg.install() {
         if [[ ! $ADD_TO_GITCONFIG =~ ^[Nn][Oo]?$ ]]; then
             # Add to the file if selected
             echo -e "\n# Include dotfiles config\n[include]" >> "$HOME/.gitconfig"
-            echo -e "  path = ~/.gitconfig.dotfiles\n" >> "$HOME/.gitconfig"
+            echo -e "\tpath = ~/.gitconfig.dotfiles\n" >> "$HOME/.gitconfig"
         else
             # Provide manual instructions
             echo -e "\nYou will need to manually include the .gitconfig.dotfiles file in your .gitconfig. Example:\n"
             echo -e "# Include dotfiles config\n[include]"
-            echo -e "  path = ~/.gitconfig.dotfiles\n"
+            echo -e "\tpath = ~/.gitconfig.dotfiles\n"
         fi
     fi
 
