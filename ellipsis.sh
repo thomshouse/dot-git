@@ -16,7 +16,7 @@ pkg.install() {
         while [ -z "$GIT_EMAIL" ]; do
             read -e -p "Enter your email address to use for Git commits: " GIT_EMAIL
         done
-        git config --global user.name "$GIT_EMAIL"
+        git config --global user.email "$GIT_EMAIL"
     fi
 
     # Check to see if .gitconfig.dotfiles is included in the main .gitconfig
