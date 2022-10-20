@@ -5,7 +5,8 @@
   ffon = "!git checkout $1 && git merge --ff-only HEAD@{1}"
   pf = pull --ff-only
   up = "!git remote update -p; git merge --ff-only @{u}"
-  pushu = "!GIT_DEFAULT_BRANCHNAME=origin && zsh -c \"git push -u \"${1-$GIT_DEFAULT_BRANCHNAME}\" `git symbolic-ref --short HEAD`\""
+  ### NOTE: "pushu" by default uses single remote if only one is set, or origin if ambiguous
+  pushu = "!test \"$(git remote | wc -l)\" -eq \"1\" && R=\"$(git remote)\" || R=origin && echo $R && sh -c \"git push -u \"${1-$R}\" \"$(git symbolic-ref --short HEAD)\"\""
   hide = update-index --assume-unchanged
   unhide = update-index --no-assume-unchanged
   hidden = "!git ls-files -v | grep ^h | cut -c 3-"
