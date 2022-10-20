@@ -18,6 +18,8 @@
   tiny = log --pretty='format:%C(auto)%h  %C(auto,cyan)%<(12)%cr%Creset %C(auto,bold)%<(16)%cn%Creset %C(auto,dim)%<(50,trunc)%s %C(auto)%d'
   tree = log --pretty='format:%C(auto)%h  %C(auto,cyan)%<(12)%cr%Creset %C(auto,bold)%<(16)%cn%Creset %C(auto,dim)%<(50,trunc)%s %C(auto)%d' --graph
   treemail = log --pretty='format:%C(auto)%h  %C(auto,cyan)%<(12)%cr%Creset %C(auto,bold)%<(16)%ce%Creset %C(auto,dim)%<(50,trunc)%s %C(auto)%d' --graph
+  ### NOTE: "unmerged" takes up to two arguments, specifying merge base and merge target respectively, both defaulting to HEAD
+  unmerged = "!sh -c \"git branch -r --contains \"${1-HEAD}\" --no-merged \"${2-${1-HEAD}}\"\""
 [core]
   excludesfile = ~/.gitignore
   editor = vim
